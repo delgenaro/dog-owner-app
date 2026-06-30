@@ -8,6 +8,7 @@ import PremiumMealPlanScreen from './src/screens/PremiumMealPlanScreen'
 import BreedCatalogScreen from './src/screens/BreedCatalogScreen'
 import BreedDetailScreen from './src/screens/BreedDetailScreen'
 import DogProfileScreen from './src/screens/DogProfileScreen'
+import NaturalSupplementsScreen from './src/screens/NaturalSupplementsScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -56,6 +57,11 @@ export default function App() {
           name="DogProfile"
           component={DogProfileScreen}
           options={{ title: 'Perfil do CÃ£o' }}
+        />
+        <Stack.Screen
+          name="NaturalSupplements"
+          component={NaturalSupplementsScreen}
+          options={{ title: 'Suplementos Naturais' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
