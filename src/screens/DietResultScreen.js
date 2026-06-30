@@ -14,7 +14,7 @@ const DIET_LABELS = {
   cooked: 'AN Cozida', barf: 'BARF', prey_model: 'Prey Model', raw_no_bones: 'AN Crua sem osso',
 }
 
-export default function DietResultScreen({ route }) {
+export default function DietResultScreen({ route, navigation }) {
   const { profile } = route.params
   const plan = calculateDiet(profile)
 
@@ -105,8 +105,8 @@ export default function DietResultScreen({ route }) {
         <Text style={styles.paywallDesc}>
           No plano pago, vocÃª define a refeiÃ§Ã£o ideal e o app calcula automaticamente as quantidades exatas de cada ingrediente para 15 ou 30 dias, gerando lista de compras completa.
         </Text>
-        <TouchableOpacity style={styles.paywallButton}>
-          <Text style={styles.paywallButtonText}>Ver Planos</Text>
+        <TouchableOpacity style={styles.paywallButton} onPress={() => navigation.navigate('PremiumMealPlan', { profile })}>
+          <Text style={styles.paywallButtonText">Ver Planos</Text>
         </TouchableOpacity>
       </View>
 
