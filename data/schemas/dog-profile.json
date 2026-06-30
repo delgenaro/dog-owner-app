@@ -1,0 +1,61 @@
+{
+  "title": "DogProfile",
+  "description": "Dados de entrada do cao para calculo da dieta personalizada",
+  "type": "object",
+  "required": ["name", "breed", "weight_kg", "age_years", "neutered", "sex", "bcs", "activity_level", "goal"],
+  "properties": {
+    "name": { "type": "string", "example": "Thor" },
+    "breed": { "type": "string", "example": "Pitbull" },
+    "weight_kg": { "type": "number", "minimum": 0.5, "maximum": 150, "example": 32 },
+    "age_years": { "type": "number", "minimum": 0.08, "maximum": 25, "example": 8 },
+    "neutered": { "type": "boolean", "description": "Castrado ou nao" },
+    "sex": { "type": "string", "enum": ["macho", "femea"] },
+    "bcs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9,
+      "description": "Escore de Condicao Corporal (1-9)",
+      "example": 5
+    },
+    "activity_level": {
+      "type": "string",
+      "enum": ["sedentario", "leve", "moderado", "ativo", "muito ativo"],
+      "description": "Nivel de atividade diaria"
+    },
+    "goal": {
+      "type": "string",
+      "enum": ["manutencao", "perda_peso", "ganho_peso"],
+      "description": "Objetivo nutricional"
+    },
+    "meal_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6,
+      "default": 2,
+      "description": "Refeicoes por dia"
+    },
+    "diet_type": {
+      "type": "string",
+      "enum": ["cooked", "barf", "raw_no_bones", "prey_model"],
+      "description": "Tipo de dieta AN escolhida"
+    },
+    "health_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["nenhuma", "renal", "pancreatite", "obesidade", "diabetes", "alergia_alimentar", "cardiopatia", "artrose"]
+      },
+      "description": "Condicoes de saude do cao"
+    },
+    "available_ingredients": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Lista de ingredientes disponiveis em casa (opcional)"
+    },
+    "excluded_ingredients": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Ingredientes a excluir (alergias, preferencias)"
+    }
+  }
+}
