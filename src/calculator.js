@@ -73,7 +73,7 @@ const GOAL_VOLUME_ADJ = {
 function dailyFoodGrams(dog) {
   const basePct = (DAILY_PCT[dog.dietType] || DAILY_PCT.cooked).pct
   const adj = GOAL_VOLUME_ADJ[dog.goal] || 1.0
-  return Math.round(dog.weightKg * (basePct / 100) * adj * 10) / 10
+  return Math.round(dog.weightKg * (basePct / 100) * adj * 1000)
 }
 
 // --- 8. Proporcoes por tipo de dieta ---
@@ -138,7 +138,7 @@ function determineSupplements(dog, groups) {
       name: 'Calcio',
       dosage: hasBone ? '1 colher cha casca ovo / kg alimento' : '1 colher cha casca ovo / kg alimento',
       critical: true,
-      reason: 'Dieta sem osso — calcio obrigatorio'
+      reason: 'Dieta sem osso ï¿½ calcio obrigatorio'
     })
   }
 
@@ -153,7 +153,7 @@ function determineSupplements(dog, groups) {
     name: 'Vitamina E',
     dosage: Math.round(dog.weightKg * 1.5) + ' UI/dia',
     critical: false,
-    reason: 'Antioxidante — essencial com omega-3'
+    reason: 'Antioxidante ï¿½ essencial com omega-3'
   })
 
   if (dog.dietType === 'cooked') {
@@ -176,21 +176,21 @@ function generateAlerts(dog, groups) {
   if (groups.liver && groups.liver.grams / totalG > 0.06) {
     alerts.push({
       severity: 'warning',
-      message: 'Figado acima de 5% da dieta — risco de hipervitaminose A'
+      message: 'Figado acima de 5% da dieta ï¿½ risco de hipervitaminose A'
     })
   }
 
   if (!groups.vegetables || groups.vegetables.grams === 0) {
     alerts.push({
       severity: 'info',
-      message: 'Zero vegetais — sem fibras e antioxidantes'
+      message: 'Zero vegetais ï¿½ sem fibras e antioxidantes'
     })
   }
 
   if (dog.ageYears >= 6) {
     alerts.push({
       severity: 'info',
-      message: 'Cao senior — considerar suplementacao articular (condroitina/glucosamina)'
+      message: 'Cao senior ï¿½ considerar suplementacao articular (condroitina/glucosamina)'
     })
   }
 
