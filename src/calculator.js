@@ -2,6 +2,7 @@
  * Diet Calculator Engine
  */
 import { NATURAL_SUPPLEMENTS } from './data/natural-supplements.js'
+import { getPreparation } from './data/preparation-guide.js'
 
 // --- 1. RER ---
 function calculateRER(weightKg) {
@@ -160,7 +161,18 @@ function getNaturalAlternatives(supplementName) {
   if (!key) return []
   const entry = NATURAL_SUPPLEMENTS.find(s => s.nutrient === key)
   if (!entry) return []
-  return entry.foods.slice(0, 3).map(f => ({ name: f.name, dosage: f.dosage }))
+  return entry.foods.slice(0, 3).map(f => {
+    const prep = f.prepKey ? getPreparation(f.prepKey) : null
+    return {
+      name: f.name,
+      dosage: f.dosage,
+      prep: prep ? {
+        best: prep.best,
+        label: prep.best === 'raw' ? 'ðŸ¥© Cru' : prep.best === 'cooked' ? 'ðŸ³ Cozido' : 'âœ… Cru ou cozido',
+        summary: prep.summary
+      } : null
+    }
+  })
 }
 
 // --- 11. Suplementacao ---
