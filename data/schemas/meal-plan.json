@@ -1,0 +1,101 @@
+{
+  "title": "MealPlan",
+  "description": "Plano alimentar gerado pela calculadora de dieta natural",
+  "type": "object",
+  "required": ["generated_at", "dog", "targets", "meals", "supplements", "alerts"],
+  "properties": {
+    "generated_at": { "type": "string", "format": "date-time" },
+    "dog": { "$ref": "dog-profile.json" },
+    "targets": {
+      "type": "object",
+      "properties": {
+        "rer_kcal": { "type": "number" },
+        "mer_kcal": { "type": "number" },
+        "daily_food_g": { "type": "number", "description": "Peso total de alimento por dia" },
+        "protein_g": { "type": "number", "description": "Meta de proteina em gramas" },
+        "fat_g": { "type": "number" },
+        "carbs_g": { "type": "number" },
+        "calcium_g": { "type": "number" },
+        "fiber_g": { "type": "number" },
+        "moisture_pct": { "type": "number" }
+      }
+    },
+    "meals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "example": "Cafe da manha" },
+          "time": { "type": "string", "example": "07:00" },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "amount_g": { "type": "number" },
+                "preparation": { "type": "string", "enum": ["cru", "cozido", "triturado", "inteiro", "descascado"] },
+                "food_group": { "type": "string" }
+              }
+            }
+          },
+          "total_kcal": { "type": "number" },
+          "calcium_note": { "type": "string", "description": "Se calculo foi suprido por osso ou suplemento" }
+        }
+      }
+    },
+    "supplements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "dosage": { "type": "string", "example": "5ml" },
+          "frequency": { "type": "string", "example": "1x/dia" },
+          "reason": { "type": "string", "example": "Suprir omega-3 (EPA/DHA)" },
+          "critical": { "type": "boolean", "description": "Se e obrigatorio ou opcional" }
+        }
+      }
+    },
+    "nutrition_summary": {
+      "type": "object",
+      "properties": {
+        "total_kcal": { "type": "number" },
+        "protein_pct": { "type": "number", "description": "% das calorias" },
+        "fat_pct": { "type": "number" },
+        "carbs_pct": { "type": "number" },
+        "ca_p_ratio": { "type": "number", "description": "Relacao calcio:fosforo" },
+        "meets_mer": { "type": "boolean" },
+        "meets_protein": { "type": "boolean" },
+        "meets_calcium": { "type": "boolean" }
+      }
+    },
+    "grocery_list": {
+      "type": "object",
+      "description": "Lista de compras (se modo lote 7 dias ativado)",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "total_g": { "type": "number" },
+              "days": { "type": "integer", "default": 7 }
+            }
+          }
+        }
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "severity": { "type": "string", "enum": ["info", "warning", "critical"] },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  }
+}
