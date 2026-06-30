@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import { subscribe, loadDogs } from '../store/dogs'
@@ -46,9 +46,13 @@ export default function HomeScreen({ navigation }) {
           style={styles.dogCard}
           onPress={() => navigation.navigate('DogProfile', { dogId: dog.id })}
         >
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>{dog.name[0]}</Text>
-          </View>
+          {dog.photoUri ? (
+            <Image source={{ uri: dog.photoUri }} style={styles.dogPhoto} />
+          ) : (
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>{dog.name[0]}</Text>
+            </View>
+          )}
           <View style={styles.dogInfo}>
             <Text style={styles.dogName}>{dog.name}</Text>
             <Text style={styles.dogBreed}>{dog.breed} Â· {dog.weightKg}kg Â· {dog.ageYears} anos</Text>
@@ -109,6 +113,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', marginBottom: spacing.sm,
     shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 4, elevation: 2,
   },
+  dogPhoto: { width: 44, height: 44, borderRadius: 22, borderWidth: 2, borderColor: colors.primary, marginRight: spacing.md },
   avatar: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.primary, justifyContent: 'center', alignItems: 'center', marginRight: spacing.md },
   avatarText: { fontSize: fontSize.lg, fontWeight: '700', color: colors.white },
   dogInfo: { flex: 1 },
