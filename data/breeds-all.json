@@ -1,0 +1,188 @@
+[
+  {
+    "id": "chihuahua", "name": "Chihuahua", "size": "small",
+    "weight_min": 1, "weight_max": 3, "life_min": 12, "life_max": 20,
+    "temperament": ["alerta", "corajoso", "leal", "vivaz"],
+    "energy_level": 3, "apartment_friendly": true
+  },
+  {
+    "id": "poodle-toy", "name": "Poodle Toy", "size": "small",
+    "weight_min": 2, "weight_max": 4, "life_min": 12, "life_max": 18,
+    "temperament": ["inteligente", "afetuoso", "ativo", "elegante"],
+    "energy_level": 3, "apartment_friendly": true
+  },
+  {
+    "id": "yorkshire-terrier", "name": "Yorkshire Terrier", "size": "small",
+    "weight_min": 2, "weight_max": 4, "life_min": 12, "life_max": 16,
+    "temperament": ["energetico", "teimoso", "corajoso", "carinhoso"],
+    "energy_level": 4, "apartment_friendly": true
+  },
+  {
+    "id": "lulu-pomerania", "name": "Lulu da Pomerania", "size": "small",
+    "weight_min": 1, "weight_max": 4, "life_min": 12, "life_max": 16,
+    "temperament": ["vivaz", "inteligente", "extrovertido", "alerta"],
+    "energy_level": 4, "apartment_friendly": true
+  },
+  {
+    "id": "shih-tzu", "name": "Shih Tzu", "size": "small",
+    "weight_min": 4, "weight_max": 7, "life_min": 10, "life_max": 16,
+    "temperament": ["amigavel", "tranquilo", "carinhoso", "brincalhao"],
+    "energy_level": 2, "apartment_friendly": true
+  },
+  {
+    "id": "maltes", "name": "Maltes", "size": "small",
+    "weight_min": 2, "weight_max": 4, "life_min": 12, "life_max": 15,
+    "temperament": ["doce", "brincalhao", "afetuoso", "esperto"],
+    "energy_level": 3, "apartment_friendly": true
+  },
+  {
+    "id": "pinscher-miniatura", "name": "Pinscher Miniatura", "size": "small",
+    "weight_min": 3, "weight_max": 5, "life_min": 12, "life_max": 16,
+    "temperament": ["alerta", "destemido", "ativo", "independente"],
+    "energy_level": 5, "apartment_friendly": true
+  },
+  {
+    "id": "bulldog-frances", "name": "Bulldog Frances", "size": "small",
+    "weight_min": 8, "weight_max": 14, "life_min": 10, "life_max": 14,
+    "temperament": ["brincalhao", "afetuoso", "sociavel", "tranquilo"],
+    "energy_level": 2, "apartment_friendly": true
+  },
+  {
+    "id": "bichon-frise", "name": "Bichon Frise", "size": "small",
+    "weight_min": 5, "weight_max": 8, "life_min": 12, "life_max": 15,
+    "temperament": ["alegre", "sociavel", "brincalhao", "afetuoso"],
+    "energy_level": 3, "apartment_friendly": true
+  },
+  {
+    "id": "beagle", "name": "Beagle", "size": "medium",
+    "weight_min": 10, "weight_max": 12, "life_min": 12, "life_max": 15,
+    "temperament": ["curioso", "amigavel", "alegre", "determinado"],
+    "energy_level": 4, "apartment_friendly": "moderate"
+  },
+  {
+    "id": "cocker-spaniel", "name": "Cocker Spaniel Ingles", "size": "medium",
+    "weight_min": 12, "weight_max": 15, "life_min": 12, "life_max": 15,
+    "temperament": ["gentil", "afetuoso", "inteligente", "alegre"],
+    "energy_level": 4, "apartment_friendly": true
+  },
+  {
+    "id": "border-collie", "name": "Border Collie", "size": "medium",
+    "weight_min": 12, "weight_max": 20, "life_min": 12, "life_max": 15,
+    "temperament": ["inteligente", "energetico", "pastoril", "obediente"],
+    "energy_level": 5, "apartment_friendly": false
+  },
+  {
+    "id": "bulldog-ingles", "name": "Bulldog Ingles", "size": "medium",
+    "weight_min": 18, "weight_max": 25, "life_min": 8, "life_max": 12,
+    "temperament": ["calmo", "corajoso", "amigavel", "determinado"],
+    "energy_level": 1, "apartment_friendly": true
+  },
+  {
+    "id": "shiba-inu", "name": "Shiba Inu", "size": "medium",
+    "weight_min": 8, "weight_max": 12, "life_min": 12, "life_max": 16,
+    "temperament": ["alerta", "independente", "leal", "digno"],
+    "energy_level": 3, "apartment_friendly": true
+  },
+  {
+    "id": "whippet", "name": "Whippet", "size": "medium",
+    "weight_min": 11, "weight_max": 18, "life_min": 12, "life_max": 15,
+    "temperament": ["calmo", "afetuoso", "rapido", "gentil"],
+    "energy_level": 2, "apartment_friendly": true
+  },
+  {
+    "id": "corgi-pembroke", "name": "Corgi Pembroke", "size": "medium",
+    "weight_min": 10, "weight_max": 14, "life_min": 12, "life_max": 15,
+    "temperament": ["inteligente", "pastoril", "afetuoso", "alerta"],
+    "energy_level": 4, "apartment_friendly": "moderate"
+  },
+  {
+    "id": "labrador-retriever", "name": "Labrador Retriever", "size": "large",
+    "weight_min": 25, "weight_max": 36, "life_min": 10, "life_max": 14,
+    "temperament": ["amigavel", "leal", "inteligente", "ativo"],
+    "energy_level": 4, "apartment_friendly": false
+  },
+  {
+    "id": "golden-retriever", "name": "Golden Retriever", "size": "large",
+    "weight_min": 25, "weight_max": 34, "life_min": 10, "life_max": 12,
+    "temperament": ["inteligente", "docil", "confiavel", "amigavel"],
+    "energy_level": 4, "apartment_friendly": false
+  },
+  {
+    "id": "pastor-alemao", "name": "Pastor Alemao", "size": "large",
+    "weight_min": 22, "weight_max": 40, "life_min": 9, "life_max": 13,
+    "temperament": ["corajoso", "leal", "inteligente", "confiante"],
+    "energy_level": 4, "apartment_friendly": false
+  },
+  {
+    "id": "rottweiler", "name": "Rottweiler", "size": "large",
+    "weight_min": 35, "weight_max": 60, "life_min": 8, "life_max": 12,
+    "temperament": ["seguro", "calmo", "corajoso", "leal"],
+    "energy_level": 3, "apartment_friendly": false
+  },
+  {
+    "id": "dobermann", "name": "Dobermann", "size": "large",
+    "weight_min": 30, "weight_max": 40, "life_min": 10, "life_max": 12,
+    "temperament": ["alerta", "leal", "inteligente", "corajoso"],
+    "energy_level": 4, "apartment_friendly": false
+  },
+  {
+    "id": "boxer", "name": "Boxer", "size": "large",
+    "weight_min": 25, "weight_max": 32, "life_min": 10, "life_max": 12,
+    "temperament": ["energetico", "paciente", "brincalhao", "protetor"],
+    "energy_level": 5, "apartment_friendly": false
+  },
+  {
+    "id": "husky-siberiano", "name": "Husky Siberiano", "size": "large",
+    "weight_min": 16, "weight_max": 27, "life_min": 12, "life_max": 15,
+    "temperament": ["energetico", "brincalhao", "sociavel", "teimoso"],
+    "energy_level": 5, "apartment_friendly": false
+  },
+  {
+    "id": "fila-brasileiro", "name": "Fila Brasileiro", "size": "large",
+    "weight_min": 40, "weight_max": 60, "life_min": 9, "life_max": 11,
+    "temperament": ["corajoso", "leal", "protetor", "calmo"],
+    "energy_level": 3, "apartment_friendly": false
+  },
+  {
+    "id": "mastiff-ingles", "name": "Mastiff Ingles", "size": "giant",
+    "weight_min": 50, "weight_max": 86, "life_min": 6, "life_max": 10,
+    "temperament": ["calmo", "digno", "leal", "protetor"],
+    "energy_level": 1, "apartment_friendly": false
+  },
+  {
+    "id": "sao-bernardo", "name": "Sao Bernardo", "size": "giant",
+    "weight_min": 55, "weight_max": 82, "life_min": 8, "life_max": 10,
+    "temperament": ["gentil", "paciente", "amigavel", "calmo"],
+    "energy_level": 2, "apartment_friendly": false
+  },
+  {
+    "id": "great-dane", "name": "Great Dane", "size": "giant",
+    "weight_min": 50, "weight_max": 82, "life_min": 7, "life_max": 10,
+    "temperament": ["amigavel", "gentil", "paciente", "confiavel"],
+    "energy_level": 3, "apartment_friendly": false
+  },
+  {
+    "id": "terra-nova", "name": "Terra Nova", "size": "giant",
+    "weight_min": 50, "weight_max": 70, "life_min": 8, "life_max": 10,
+    "temperament": ["docil", "paciente", "gentil", "protetor"],
+    "energy_level": 3, "apartment_friendly": false
+  },
+  {
+    "id": "irish-wolfhound", "name": "Irish Wolfhound", "size": "giant",
+    "weight_min": 48, "weight_max": 70, "life_min": 6, "life_max": 10,
+    "temperament": ["gentil", "corajoso", "calmo", "digno"],
+    "energy_level": 2, "apartment_friendly": false
+  },
+  {
+    "id": "mastim-tibetano", "name": "Mastim Tibetano", "size": "giant",
+    "weight_min": 45, "weight_max": 73, "life_min": 10, "life_max": 14,
+    "temperament": ["independente", "protetor", "leal", "digno"],
+    "energy_level": 2, "apartment_friendly": false
+  },
+  {
+    "id": "bernese-mountain-dog", "name": "Boieiro Bernes", "size": "giant",
+    "weight_min": 35, "weight_max": 55, "life_min": 6, "life_max": 10,
+    "temperament": ["calmo", "afetuoso", "fiel", "tranquilo"],
+    "energy_level": 3, "apartment_friendly": false
+  }
+]
