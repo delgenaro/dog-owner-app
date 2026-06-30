@@ -1,0 +1,52 @@
+{
+  "formula": {
+    "rer": "70 x (weight_kg ^ 0.75)",
+    "mer": "rer x multiplier"
+  },
+  "life_stage_multipliers": {
+    "puppy_under_4_months": { "min": 3.0, "max": 3.0, "description": "Filhote ate 4 meses" },
+    "puppy_over_4_months": { "min": 2.0, "max": 2.0, "description": "Filhote acima de 4 meses" },
+    "adult_intact": { "min": 1.6, "max": 1.8, "description": "Adulto nao castrado" },
+    "adult_neutered": { "min": 1.4, "max": 1.6, "description": "Adulto castrado" },
+    "sedentary_obese": { "min": 1.0, "max": 1.2, "description": "Sedentario ou obeso" },
+    "weight_loss": { "min": 1.0, "max": 1.0, "description": "Perda de peso (ideal weight)" },
+    "weight_gain": { "min": 1.2, "max": 1.8, "description": "Ganho de peso" },
+    "gestation": { "min": 3.0, "max": 3.0, "description": "Gestacao" },
+    "lactation": { "min": 4.0, "max": 8.0, "description": "Lactacao" },
+    "light_work": { "min": 2.0, "max": 2.0, "description": "Trabalho leve" },
+    "heavy_work": { "min": 3.0, "max": 6.0, "description": "Trabalho intenso" },
+    "senior_active": { "min": 1.2, "max": 1.4, "description": "Senior ativo" },
+    "senior_sedentary": { "min": 1.0, "max": 1.2, "description": "Senior sedentario" }
+  },
+  "bcs_correction": {
+    "description": "A cada ponto acima do ideal (5), reduzir 9.8 kcal/kg^0.75",
+    "points": {
+      "1": { "label": "Severamente abaixo do peso", "adjustment": "increase" },
+      "2": { "label": "Muito magro", "adjustment": "increase" },
+      "3": { "label": "Magro", "adjustment": "slight_increase" },
+      "4": { "label": "Levemente abaixo", "adjustment": "slight_increase" },
+      "5": { "label": "Peso ideal", "adjustment": "none" },
+      "6": { "label": "Levemente acima", "adjustment": "slight_decrease" },
+      "7": { "label": "Sobrepeso", "adjustment": "decrease" },
+      "8": { "label": "Obeso", "adjustment": "significant_decrease" },
+      "9": { "label": "Obesidade clinica", "adjustment": "significant_decrease" }
+    }
+  },
+  "size_adjustments": {
+    "small": { "metabolism_factor": 1.2, "senior_age_years": 10, "description": "Ate 10kg" },
+    "medium": { "metabolism_factor": 1.0, "senior_age_years": 8, "description": "10-25kg" },
+    "large": { "metabolism_factor": 0.9, "senior_age_years": 6, "description": "25-44kg" },
+    "giant": { "metabolism_factor": 0.85, "senior_age_years": 5, "description": "Acima 44kg" }
+  },
+  "macronutrient_minimums": {
+    "protein_pct": 16,
+    "fat_pct": 4.5,
+    "fiber_max_pct": 6.5,
+    "calcium_pct": 0.5,
+    "phosphorus_pct": 0.4,
+    "moisture_max_pct": 12
+  },
+  "water_requirement": "50-70 ml/kg/day or 2 ml per kcal of food",
+  "version": "1.0",
+  "last_updated": "2026-06-30"
+}
