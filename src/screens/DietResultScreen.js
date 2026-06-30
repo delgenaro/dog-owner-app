@@ -107,8 +107,23 @@ export default function DietResultScreen({ route, navigation }) {
             )}
             {expandedAlt === i && s.naturalAlternatives && s.naturalAlternatives.map((alt, j) => (
               <View key={j} style={styles.altItem}>
-                <Text style={styles.altName}>â†’ {alt.name}</Text>
+                <View style={styles.altHeader}>
+                  <Text style={styles.altName}>â†’ {alt.name}</Text>
+                  {alt.prep && (
+                    <View style={[
+                      styles.prepBadge,
+                      alt.prep.best === 'raw' ? styles.prepBadgeRaw :
+                      alt.prep.best === 'cooked' ? styles.prepBadgeCooked :
+                      styles.prepBadgeBoth
+                    ]}>
+                      <Text style={styles.prepBadgeText}>{alt.prep.label.split(' ')[1]}</Text>
+                    </View>
+                  )}
+                </View>
                 <Text style={styles.altDosage}>{alt.dosage}</Text>
+                {alt.prep && alt.prep.best !== 'both' && (
+                  <Text style={styles.altPrep}>{alt.prep.summary}</Text>
+                )}
               </View>
             ))}
           </View>
@@ -193,8 +208,15 @@ const styles = StyleSheet.create({
   altToggle: { marginTop: spacing.sm, paddingVertical: 4 },
   altToggleText: { fontSize: fontSize.sm, color: colors.primary, fontWeight: '600' },
   altItem: { backgroundColor: '#F5FAF0', borderRadius: borderRadius.sm, padding: spacing.sm, marginTop: spacing.xs },
-  altName: { fontSize: fontSize.sm, fontWeight: '600', color: colors.text },
+  altHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  altName: { fontSize: fontSize.sm, fontWeight: '600', color: colors.text, flex: 1 },
   altDosage: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 1 },
+  altPrep: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 4, fontStyle: 'italic', lineHeight: 16 },
+  prepBadge: { paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4, marginLeft: spacing.sm },
+  prepBadgeRaw: { backgroundColor: '#DFF0D8' },
+  prepBadgeCooked: { backgroundColor: '#FCF8E3' },
+  prepBadgeBoth: { backgroundColor: '#D9EDF7' },
+  prepBadgeText: { fontSize: 11, fontWeight: '700' },
 
   eggCard: {
     backgroundColor: '#FFF8E1', borderRadius: borderRadius.md, padding: spacing.md,
