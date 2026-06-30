@@ -1,12 +1,7 @@
 /**
  * Diet Calculator Engine
- * Calcula RER, MER, plano alimentar e suplementacao para caes
- * em Alimentacao Natural.
- *
- * Uso:
- *   import { calculateDiet } from './calculator.js'
- *   const plan = calculateDiet(dogProfile)
  */
+import { NATURAL_SUPPLEMENTS } from './data/natural-supplements.js'
 
 // --- 1. RER ---
 function calculateRER(weightKg) {
@@ -152,7 +147,7 @@ function allocateIngredients(dog) {
 }
 
 // --- 10. Database de alternativas naturais ---
-const SUPPLEMENT_TO_NATURAL = {
+const SUPPLEMENT_NATURAL_MAP = {
   'Calcio': 'C\u00e1lcio',
   'Oleo de peixe (EPA/DHA)': '\u00d4mega-3 (EPA/DHA)',
   'Vitamina E': 'Vitamina E',
@@ -160,18 +155,10 @@ const SUPPLEMENT_TO_NATURAL = {
   'Calcio da casca do ovo': 'C\u00e1lcio',
 }
 
-const NATURAL_FOODS_CACHE = {}
-try {
-  const { NATURAL_SUPPLEMENTS } = require('./data/natural-supplements')
-  for (const s of NATURAL_SUPPLEMENTS) {
-    NATURAL_FOODS_CACHE[s.nutrient] = s
-  }
-} catch (e) { /* fallback */ }
-
 function getNaturalAlternatives(supplementName) {
-  const key = SUPPLEMENT_TO_NATURAL[supplementName]
+  const key = SUPPLEMENT_NATURAL_MAP[supplementName]
   if (!key) return []
-  const entry = NATURAL_FOODS_CACHE[key]
+  const entry = NATURAL_SUPPLEMENTS.find(s => s.nutrient === key)
   if (!entry) return []
   return entry.foods.slice(0, 3).map(f => ({ name: f.name, dosage: f.dosage }))
 }
@@ -185,9 +172,10 @@ function determineSupplements(dog, groups) {
     const alt = getNaturalAlternatives('Calcio')
     supplements.push({
       name: 'Calcio',
-      dosage: hasBone ? '1 colher cha casca ovo / kg alimento' : '1 colher cha casca ovo / kg alimento',
+      dosage: '1 colher cha casca ovo / kg alimento',
       critical: true,
-      reason: 'Dieta sem osso ï¿½ calcio obrigatorio'
+      reason: 'Dieta sem osso: calcio obrigatorio',
+      naturalAlternatives: alt
     })
   }
 
