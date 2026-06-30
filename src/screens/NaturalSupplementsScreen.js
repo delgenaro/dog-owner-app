@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import { NATURAL_SUPPLEMENTS, getSupplementsByCriticality } from '../data/natural-supplements'
+import { getPreparation } from '../data/preparation-guide.js'
 
 export default function NaturalSupplementsScreen() {
   const [selected, setSelected] = useState(null)
@@ -58,6 +59,17 @@ export default function NaturalSupplementsScreen() {
 function SupplementCard({ sup }) {
   const [expanded, setExpanded] = useState(null)
 
+  function getPrepBadge(prepKey) {
+    if (!prepKey) return null
+    const p = getPreparation(prepKey)
+    if (!p) return null
+    return {
+      best: p.best,
+      label: p.best === 'raw' ? 'ðŸ¥© Cru' : p.best === 'cooked' ? 'ðŸ³ Cozido' : 'âœ… Cru/coz.',
+      summary: p.summary
+    }
+  }
+
   return (
     <View style={styles.detailCard}>
       <View style={styles.detailHeader}>
@@ -76,16 +88,26 @@ function SupplementCard({ sup }) {
       </View>
 
       <Text style={styles.sectionLabel}>Fontes naturais:</Text>
-      {sup.foods.map((f, i) => (
+      {sup.foods.map((f, i) => {
+        const badge = getPrepBadge(f.prepKey)
+        return (
         <TouchableOpacity key={i} style={styles.foodRow} onPress={() => setExpanded(expanded === i ? null : i)}>
           <View style={styles.foodHeader}>
             <Text style={styles.foodName}>{f.name}</Text>
-            <Text style={styles.foodArrow}>{expanded === i ? 'â–²' : 'â–¼'}</Text>
+            <View style={styles.foodHeaderRight}>
+              {badge && (
+                <View style={[styles.foodPrepBadge, badge.best === 'raw' ? styles.fppRaw : badge.best === 'cooked' ? styles.fppCooked : styles.fppBoth]}>
+                  <Text style={styles.fppText}>{badge.label}</Text>
+                </View>
+              )}
+              <Text style={styles.foodArrow}>{expanded === i ? 'â–²' : 'â–¼'}</Text>
+            </View>
           </View>
           <Text style={styles.foodDosage}>{f.dosage}</Text>
           {expanded === i && f.note && <Text style={styles.foodNote}>{f.note}</Text>}
+          {expanded === i && badge && badge.summary && <Text style={styles.prepSummary}>{badge.summary}</Text>}
         </TouchableOpacity>
-      ))}
+      )})}
 
       {sup.tip && (
         <View style={styles.tipBox}>
@@ -143,10 +165,17 @@ const styles = StyleSheet.create({
 
   foodRow: { paddingVertical: spacing.sm, borderBottomWidth: 1, borderBottomColor: colors.border },
   foodHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  foodHeaderRight: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   foodName: { fontSize: fontSize.md, fontWeight: '600', color: colors.text, flex: 1 },
   foodArrow: { fontSize: fontSize.xs, color: colors.textSecondary },
   foodDosage: { fontSize: fontSize.sm, color: colors.primary, fontWeight: '500', marginTop: 2 },
   foodNote: { fontSize: fontSize.sm, color: colors.textSecondary, marginTop: 4, lineHeight: 18, fontStyle: 'italic' },
+  foodPrepBadge: { paddingHorizontal: 5, paddingVertical: 1, borderRadius: 3 },
+  fppRaw: { backgroundColor: '#DFF0D8' },
+  fppCooked: { backgroundColor: '#FCF8E3' },
+  fppBoth: { backgroundColor: '#D9EDF7' },
+  fppText: { fontSize: 10, fontWeight: '700' },
+  prepSummary: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 4, lineHeight: 16, fontStyle: 'italic', backgroundColor: '#F5F5F5', padding: spacing.xs, borderRadius: 4 },
 
   tipBox: { backgroundColor: '#DFF0D8', borderRadius: borderRadius.sm, padding: spacing.sm, marginTop: spacing.md },
   tipLabel: { fontSize: fontSize.sm, fontWeight: '700', color: '#3C763D', marginBottom: 2 },
