@@ -1,3 +1,17 @@
+export const EGG_INFO = {
+  label: 'Ovo de galinha inteiro (c/ casca)',
+  value: 'ovo_inteiro',
+  weightPerUnit_g: 55,
+  ediblePerUnit_g: 50,
+  shellPerUnit_g: 5,
+  kcalPerUnit: 78,
+  proteinPerUnit_g: 6.5,
+  fatPerUnit_g: 5.5,
+  calciumPerUnit_mg: 2000,
+  note: 'Casca fornece ~2000mg de calcio. Clara crua contem avidina (sequestra biotina) â€” cozinhar elimina o risco.',
+  price: 'muito barato',
+}
+
 export const SUGGESTED_INGREDIENTS = {
   meat: [
     { label: 'Coxa de frango (c/ osso)', value: 'frango_cxa', group: 'meat' },
@@ -6,6 +20,7 @@ export const SUGGESTED_INGREDIENTS = {
     { label: 'AcÃ©m bovino', value: 'bovino_acem', group: 'meat' },
     { label: 'CoraÃ§Ã£o bovino', value: 'coracao_bovino', group: 'meat' },
     { label: 'Sardinha', value: 'sardinha', group: 'meat' },
+    { label: 'Ovo de galinha inteiro', value: 'ovo_inteiro', group: 'meat' },
   ],
   muscle_meat: [
     { label: 'Coxa de frango (c/ osso)', value: 'frango_cxa', group: 'muscle_meat' },
@@ -14,6 +29,7 @@ export const SUGGESTED_INGREDIENTS = {
     { label: 'AcÃ©m bovino', value: 'bovino_acem', group: 'muscle_meat' },
     { label: 'Sobrecoxa de frango', value: 'frango_sobrecoxa', group: 'muscle_meat' },
     { label: 'Sardinha', value: 'sardinha', group: 'muscle_meat' },
+    { label: 'Ovo de galinha inteiro', value: 'ovo_inteiro', group: 'muscle_meat' },
   ],
   liver: [
     { label: 'FÃ­gado de frango', value: 'figado_frango', group: 'liver' },
