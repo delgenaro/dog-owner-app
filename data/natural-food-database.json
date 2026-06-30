@@ -1,0 +1,109 @@
+{
+  "diet_types": {
+    "cooked": { "label": "AN Cozida", "description": "Alimentos levemente cozidos", "difficulty": "iniciante" },
+    "barf": { "label": "BARF", "description": "Biologically Appropriate Raw Food", "difficulty": "avancado" },
+    "raw_no_bones": { "label": "AN Crua sem ossos", "description": "Crua com calcio suplementar", "difficulty": "intermediario" },
+    "prey_model": { "label": "Prey Model", "description": "100% animal, sem vegetais", "difficulty": "avancado" }
+  },
+  "daily_amount_pct": {
+    "sedentary_adult": { "min": 2.0, "max": 2.0 },
+    "moderate_adult": { "min": 2.5, "max": 3.0 },
+    "active_adult": { "min": 3.0, "max": 4.0 },
+    "puppy": { "min": 3.0, "max": 6.0 },
+    "senior": { "min": 2.0, "max": 2.5 }
+  },
+  "cooked_ratios": {
+    "meat": { "pct": 30, "description": "Carnes desossadas" },
+    "organs": { "pct": 5, "description": "Vísceras (figado, coracao, rim)" },
+    "carbs": { "pct": 35, "description": "Carboidratos (batata-doce, arroz)" },
+    "vegetables": { "pct": 30, "description": "Vegetais (cenoura, abobrinha)" },
+    "fruits_extra": { "pct": 15, "description": "Frutas como petisco (extra)" }
+  },
+  "barf_ratios": {
+    "muscle_meat": { "pct": 70 },
+    "raw_edible_bone": { "pct": 10 },
+    "liver": { "pct": 5 },
+    "other_organs": { "pct": 5 },
+    "vegetables": { "pct": 7 },
+    "seeds_nuts": { "pct": 2 },
+    "fruit": { "pct": 1 }
+  },
+  "food_groups": {
+    "meat": {
+      "label": "Carnes",
+      "examples": ["Frango", "Bovino", "Suino", "Peixe", "Cordeiro", "Peru", "Ovo"],
+      "nutrition_per_100g": { "protein_g": 22, "fat_g": 5, "calcium_mg": 10, "phosphorus_mg": 180 }
+    },
+    "organs": {
+      "label": "Vísceras",
+      "examples": ["Figado", "Coracao", "Rim", "Moela", "Baco", "Pulmao"],
+      "note": "Figado max 5% da dieta - risco de hipervitaminose A",
+      "nutrition_per_100g": { "protein_g": 20, "fat_g": 4, "vitamin_a_ui": 15000, "iron_mg": 5 }
+    },
+    "carbs": {
+      "label": "Carboidratos",
+      "examples": ["Batata-doce", "Mandioquinha", "Inhame", "Arroz integral", "Aveia", "Mandioca", "Quinoa"],
+      "nutrition_per_100g": { "carbs_g": 25, "fiber_g": 3, "calories_kcal": 100 }
+    },
+    "vegetables": {
+      "label": "Vegetais",
+      "examples": ["Cenoura", "Abobrinha", "Brocolis", "Couve-flor", "Chuchu", "Vagem", "Beterraba", "Abobora", "Espinafre"],
+      "nutrition_per_100g": { "fiber_g": 2.5, "vitamin_a_ui": 5000, "calories_kcal": 30 }
+    },
+    "fruits": {
+      "label": "Frutas",
+      "examples": ["Maca", "Banana", "Pera", "Melancia", "Mamao", "Mirtilo", "Morango", "Manga", "Kiwi"],
+      "note": "Oferecer como petisco com moderacao",
+      "nutrition_per_100g": { "sugar_g": 10, "fiber_g": 2, "vitamin_c_mg": 20 }
+    },
+    "oils": {
+      "label": "Gorduras",
+      "examples": ["Oleo de coco", "Azeite de oliva", "Oleo de peixe", "Oleo de linhaça"],
+      "nutrition_per_5ml": { "fat_g": 5, "omega3_mg": 1000 }
+    }
+  },
+  "prohibited_foods": [
+    { "name": "Chocolate", "risk": "Teobromina - toxica" },
+    { "name": "Cebola", "risk": "Danifica hemacias" },
+    { "name": "Alho", "risk": "Danifica hemacias" },
+    { "name": "Uva", "risk": "Insuficiencia renal" },
+    { "name": "Uva passa", "risk": "Insuficiencia renal" },
+    { "name": "Carambola", "risk": "Toxica para rins" },
+    { "name": "Macadamia", "risk": "Neurotoxica" },
+    { "name": "Ossos cozidos", "risk": "Lascam - risco de perfuracao" },
+    { "name": "Xilitol", "risk": "Hipoglicemia fatal" },
+    { "name": "Cafe", "risk": "Estimulante toxico" },
+    { "name": "Alcool", "risk": "Depressor do SNC" },
+    { "name": "Abacate (casca/caroco)", "risk": "Persina - toxica" },
+    { "name": "Sal excessivo", "risk": "Desidratacao, sodio" }
+  ],
+  "supplements": {
+    "calcium": {
+      "importance": "CRITICO",
+      "reason": "Carne tem muito fosforo e pouco calcio",
+      "sources": ["Casca de ovo em po", "Farinha de ossos", "Suplemento mineral (Food Dog)"],
+      "dosage_per_kg_food_g": 1
+    },
+    "omega3": {
+      "importance": "Alta",
+      "reason": "Anti-inflamatorio, pele e pelo",
+      "sources": ["Oleo de peixe", "Oleo de salmao"],
+      "dosage_per_10kg_mg": 1000
+    },
+    "vitamin_e": {
+      "importance": "Media",
+      "reason": "Antioxidante",
+      "dosage_per_10kg_ui": 50
+    },
+    "vitamin_b_complex": {
+      "importance": "Media",
+      "reason": "Dieta cozida pode perder vitaminas do complexo B"
+    },
+    "taurine": {
+      "importance": "Media",
+      "reason": "Saude cardiaca - especialmente em dieta cozida"
+    }
+  },
+  "version": "1.0",
+  "last_updated": "2026-06-30"
+}
