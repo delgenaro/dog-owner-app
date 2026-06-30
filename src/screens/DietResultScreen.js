@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import { calculateDiet } from '../calculator'
@@ -17,6 +18,7 @@ const DIET_LABELS = {
 export default function DietResultScreen({ route, navigation }) {
   const { profile } = route.params
   const plan = calculateDiet(profile)
+  const [expandedAlt, setExpandedAlt] = useState(null)
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -96,6 +98,19 @@ export default function DietResultScreen({ route, navigation }) {
             </View>
             <Text style={styles.supplementDosage}>Dose: {s.dosage}</Text>
             <Text style={styles.supplementReason}>{s.reason}</Text>
+            {s.naturalAlternatives && s.naturalAlternatives.length > 0 && (
+              <TouchableOpacity style={styles.altToggle} onPress={() => setExpandedAlt(expandedAlt === i ? null : i)}>
+                <Text style={styles.altToggleText}>
+                  {expandedAlt === i ? 'â–² Alternativas naturais' : 'â–¼ Alternativas naturais'}
+                </Text>
+              </TouchableOpacity>
+            )}
+            {expandedAlt === i && s.naturalAlternatives && s.naturalAlternatives.map((alt, j) => (
+              <View key={j} style={styles.altItem}>
+                <Text style={styles.altName}>â†’ {alt.name}</Text>
+                <Text style={styles.altDosage}>{alt.dosage}</Text>
+              </View>
+            ))}
           </View>
         ))}
       </View>
@@ -175,6 +190,11 @@ const styles = StyleSheet.create({
   criticalBadge: { fontSize: fontSize.xs, color: colors.white, backgroundColor: colors.danger, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4, fontWeight: '700' },
   supplementDosage: { fontSize: fontSize.sm, color: colors.text, marginTop: 2 },
   supplementReason: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 2 },
+  altToggle: { marginTop: spacing.sm, paddingVertical: 4 },
+  altToggleText: { fontSize: fontSize.sm, color: colors.primary, fontWeight: '600' },
+  altItem: { backgroundColor: '#F5FAF0', borderRadius: borderRadius.sm, padding: spacing.sm, marginTop: spacing.xs },
+  altName: { fontSize: fontSize.sm, fontWeight: '600', color: colors.text },
+  altDosage: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 1 },
 
   eggCard: {
     backgroundColor: '#FFF8E1', borderRadius: borderRadius.md, padding: spacing.md,
