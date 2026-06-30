@@ -66,11 +66,20 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.sectionTitle}>Ferramentas</Text>
       </View>
 
-      <TouchableOpacity style={styles.toolCard} onPress={() => navigation.navigate('BreedCatalog')}>
+      <TouchableOpacity style={[styles.toolCard, { borderLeftColor: '#4A90D9' }]} onPress={() => navigation.navigate('BreedCatalog')}>
         <Text style={styles.toolIcon}>ðŸ“–</Text>
         <View style={styles.toolBody}>
           <Text style={styles.toolTitle}>CatÃ¡logo de RaÃ§as</Text>
           <Text style={styles.toolDesc}>68 raÃ§as com peso, altura, temperamento e saÃºde</Text>
+        </View>
+        <Text style={styles.arrow}>â€º</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.toolCard, { borderLeftColor: '#F0AD4E' }]} onPress={() => navigation.navigate('NaturalSupplements')}>
+        <Text style={styles.toolIcon}>ðŸŒ¿</Text>
+        <View style={styles.toolBody}>
+          <Text style={styles.toolTitle}>Suplementos Naturais</Text>
+          <Text style={styles.toolDesc}>Alternativas caseiras para cÃ¡lcio, Ã´mega-3, taurina e mais</Text>
         </View>
         <Text style={styles.arrow}>â€º</Text>
       </TouchableOpacity>
