@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import { getDog, removeDog } from '../store/dogs'
@@ -44,9 +44,13 @@ export default function DogProfileScreen({ route, navigation }) {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.profileHeader}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>{dog.name[0]}</Text>
-        </View>
+        {dog.photoUri ? (
+          <Image source={{ uri: dog.photoUri }} style={styles.photo} />
+        ) : (
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>{dog.name[0]}</Text>
+          </View>
+        )}
         <Text style={styles.dogName}>{dog.name}</Text>
         <Text style={styles.dogBreed}>{dog.breed} Â· {dog.weightKg}kg Â· {dog.ageYears} anos</Text>
         <Text style={styles.dogMeta}>
@@ -91,6 +95,7 @@ const styles = StyleSheet.create({
   content: { padding: spacing.md },
 
   profileHeader: { alignItems: 'center', paddingVertical: spacing.lg },
+  photo: { width: 96, height: 96, borderRadius: 48, borderWidth: 3, borderColor: colors.primary, marginBottom: spacing.sm },
   avatar: {
     width: 72, height: 72, borderRadius: 36, backgroundColor: colors.primary,
     justifyContent: 'center', alignItems: 'center', marginBottom: spacing.sm,
