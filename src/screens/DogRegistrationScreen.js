@@ -57,10 +57,6 @@ export default function DogRegistrationScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <TouchableOpacity style={styles.catalogLink} onPress={() => navigation.navigate('BreedCatalog')}>
-        <Text style={styles.catalogLinkText}>ðŸ“– CatÃ¡logo de RaÃ§as</Text>
-      </TouchableOpacity>
-
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>IdentificaÃ§Ã£o</Text>
         <FormField label="Nome do cÃ£o" value={form.name} onChangeText={v => update('name', v)} placeholder="Ex: Thor" error={errors.name} />
@@ -131,13 +127,6 @@ export default function DogRegistrationScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   content: { padding: spacing.md },
-  catalogLink: {
-    backgroundColor: colors.white, borderRadius: borderRadius.md, padding: spacing.md,
-    marginBottom: spacing.md, borderWidth: 1.5, borderColor: colors.primary, borderStyle: 'dashed',
-    alignItems: 'center',
-  },
-  catalogLinkText: { fontSize: fontSize.md, color: colors.primary, fontWeight: '700' },
-
   section: {
     backgroundColor: colors.white,
     borderRadius: borderRadius.md,
