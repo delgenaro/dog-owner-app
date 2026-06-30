@@ -65,3 +65,13 @@ export const PORTE_OPTIONS = [
   { label: 'Grande (25-44kg)', value: 'large' },
   { label: 'Gigante (45kg+)', value: 'giant' },
 ]
+
+export const EGG_OPTIONS = [
+  { label: '0 ovos', value: 0 },
+  { label: '1 ovo/dia', value: 1, desc: '~55g, substitui ~50g de carne' },
+  { label: '2 ovos/dia', value: 2, desc: '~110g, substitui ~100g de carne' },
+  { label: '3 ovos/dia', value: 3, desc: '~165g, substitui ~150g de carne' },
+  { label: '4 ovos/dia', value: 4, desc: '~220g, substitui ~200g de carne' },
+  { label: '5 ovos/dia', value: 5, desc: 'Economia maxima, cozinhar obrigatorio' },
+  { label: '6 ovos/dia', value: 6, desc: 'Grande economia, cozinhar obrigatorio' },
+]
