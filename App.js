@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { StatusBar } from 'expo-status-bar'
+import HomeScreen from './src/screens/HomeScreen'
 import DogRegistrationScreen from './src/screens/DogRegistrationScreen'
 import DietResultScreen from './src/screens/DietResultScreen'
 import PremiumMealPlanScreen from './src/screens/PremiumMealPlanScreen'
@@ -20,6 +21,11 @@ export default function App() {
           headerTitleStyle: { fontWeight: '700' }
         }}
       >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Dog Owner App', headerStyle: { backgroundColor: '#357ABD' } }}
+        />
         <Stack.Screen
           name="DogRegistration"
           component={DogRegistrationScreen}
