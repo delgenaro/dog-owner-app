@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-nati
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import {
   SEX_OPTIONS, NEUTERED_OPTIONS, ACTIVITY_OPTIONS, GOAL_OPTIONS,
-  DIET_TYPE_OPTIONS, MEAL_COUNT_OPTIONS, HEALTH_OPTIONS, PORTE_OPTIONS
+  DIET_TYPE_OPTIONS, MEAL_COUNT_OPTIONS, HEALTH_OPTIONS, PORTE_OPTIONS, EGG_OPTIONS
 } from '../constants/options'
 import FormField from '../components/FormField'
 import PickerField from '../components/PickerField'
@@ -23,6 +23,7 @@ const INITIAL_STATE = {
   goal: 'manutencao',
   mealCount: 2,
   dietType: 'barf',
+  eggsPerDay: 0,
   healthConditions: ['nenhuma'],
 }
 
@@ -107,6 +108,7 @@ export default function DogRegistrationScreen({ navigation }) {
         <Text style={styles.sectionTitle}>Dieta</Text>
         <PickerField label="Tipo de alimentaÃ§Ã£o" options={DIET_TYPE_OPTIONS} value={form.dietType} onValueChange={v => update('dietType', v)} />
         <PickerField label="RefeiÃ§Ãµes por dia" options={MEAL_COUNT_OPTIONS} value={form.mealCount} onValueChange={v => update('mealCount', v)} />
+        <PickerField label="Ovos por dia (opcional)" options={EGG_OPTIONS} value={form.eggsPerDay} onValueChange={v => update('eggsPerDay', v)} />
       </View>
 
       <View style={styles.section}>
