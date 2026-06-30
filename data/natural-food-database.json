@@ -1,9 +1,20 @@
 {
   "diet_types": {
-    "cooked": { "label": "AN Cozida", "description": "Alimentos levemente cozidos", "difficulty": "iniciante" },
-    "barf": { "label": "BARF", "description": "Biologically Appropriate Raw Food", "difficulty": "avancado" },
-    "raw_no_bones": { "label": "AN Crua sem ossos", "description": "Crua com calcio suplementar", "difficulty": "intermediario" },
-    "prey_model": { "label": "Prey Model", "description": "100% animal, sem vegetais", "difficulty": "avancado" }
+    "cooked": { "label": "AN Cozida", "description": "Alimentos levemente cozidos", "difficulty": "iniciante", "needs_calcium_supplement": true, "needs_taurine_supplement": true },
+    "barf": { "label": "BARF", "description": "Biologically Appropriate Raw Food, crua com ossos", "difficulty": "avancado", "needs_calcium_supplement": false, "needs_taurine_supplement": false },
+    "raw_no_bones": { "label": "AN Crua sem ossos", "description": "Crua com calcio suplementar", "difficulty": "intermediario", "needs_calcium_supplement": true, "needs_taurine_supplement": false },
+    "prey_model": { "label": "Prey Model", "description": "100% animal, sem vegetais", "difficulty": "avancado", "needs_calcium_supplement": false, "needs_taurine_supplement": false }
+  },
+  "calcium_phosphorus": {
+    "ideal_ratio_min": 1.0,
+    "ideal_ratio_max": 2.0,
+    "note": "A relacao Ca:P ideal e de 1:1 a 2:1. Carne pura tem relacao 1:10 a 1:20 (muito fosforo, pouco calcio). Ossos crus equilibram naturalmente.",
+    "meat_ca_p_ratio": "1:10 a 1:20",
+    "chicken_neck_bone_pct": 27,
+    "chicken_back_bone_pct": 38,
+    "chicken_wing_bone_pct": 39,
+    "beef_rib_bone_pct": 27,
+    "lamb_rib_bone_pct": 27
   },
   "daily_amount_pct": {
     "sedentary_adult": { "min": 2.0, "max": 2.0 },
@@ -14,14 +25,14 @@
   },
   "cooked_ratios": {
     "meat": { "pct": 30, "description": "Carnes desossadas" },
-    "organs": { "pct": 5, "description": "Vísceras (figado, coracao, rim)" },
+    "organs": { "pct": 5, "description": "Visceras (figado, coracao, rim)" },
     "carbs": { "pct": 35, "description": "Carboidratos (batata-doce, arroz)" },
     "vegetables": { "pct": 30, "description": "Vegetais (cenoura, abobrinha)" },
     "fruits_extra": { "pct": 15, "description": "Frutas como petisco (extra)" }
   },
   "barf_ratios": {
     "muscle_meat": { "pct": 70 },
-    "raw_edible_bone": { "pct": 10 },
+    "raw_edible_bone": { "pct": 10, "note": "Fornece calcio e fosforo naturalmente, eliminando necessidade de suplemento de calcio" },
     "liver": { "pct": 5 },
     "other_organs": { "pct": 5 },
     "vegetables": { "pct": 7 },
@@ -32,13 +43,23 @@
     "meat": {
       "label": "Carnes",
       "examples": ["Frango", "Bovino", "Suino", "Peixe", "Cordeiro", "Peru", "Ovo"],
-      "nutrition_per_100g": { "protein_g": 22, "fat_g": 5, "calcium_mg": 10, "phosphorus_mg": 180 }
+      "nutrition_per_100g": { "protein_g": 22, "fat_g": 5, "calcium_mg": 10, "phosphorus_mg": 180 },
+      "ca_p_ratio": "1:18",
+      "note": "Muito fosforo, pouco calcio. Sempre exigira suplementacao de calcio se for a base da dieta."
     },
     "organs": {
-      "label": "Vísceras",
+      "label": "Visceras",
       "examples": ["Figado", "Coracao", "Rim", "Moela", "Baco", "Pulmao"],
-      "note": "Figado max 5% da dieta - risco de hipervitaminose A",
-      "nutrition_per_100g": { "protein_g": 20, "fat_g": 4, "vitamin_a_ui": 15000, "iron_mg": 5 }
+      "note": "Figado max 5% da dieta - risco de hipervitaminose A. Coracao e rico em taurina.",
+      "nutrition_per_100g": { "protein_g": 20, "fat_g": 4, "vitamin_a_ui": 15000, "iron_mg": 5, "taurine_mg": 50 }
+    },
+    "raw_meaty_bones": {
+      "label": "Ossos Carnudos Crus",
+      "examples": ["Pescoco de frango", "Dorso de frango", "Asa de frango", "Costela bovina crua"],
+      "note": "Fonte natural de calcio na proporcao ideal. Nunca oferecer ossos cozidos.",
+      "nutrition_per_100g": { "calcium_mg": 1500, "phosphorus_mg": 800, "protein_g": 18, "fat_g": 8 },
+      "ca_p_ratio": "1.9:1",
+      "safety_guidelines": "Supervisionar sempre. Escolher tamanho adequado ao porte. Congelar 3 dias antes se possivel."
     },
     "carbs": {
       "label": "Carboidratos",
@@ -53,7 +74,7 @@
     "fruits": {
       "label": "Frutas",
       "examples": ["Maca", "Banana", "Pera", "Melancia", "Mamao", "Mirtilo", "Morango", "Manga", "Kiwi"],
-      "note": "Oferecer como petisco com moderacao",
+      "note": "Oferecer como petisco com moderacao - acucar natural",
       "nutrition_per_100g": { "sugar_g": 10, "fiber_g": 2, "vitamin_c_mg": 20 }
     },
     "oils": {
@@ -70,40 +91,45 @@
     { "name": "Uva passa", "risk": "Insuficiencia renal" },
     { "name": "Carambola", "risk": "Toxica para rins" },
     { "name": "Macadamia", "risk": "Neurotoxica" },
-    { "name": "Ossos cozidos", "risk": "Lascam - risco de perfuracao" },
+    { "name": "Ossos cozidos", "risk": "Lascam - risco de perfuracao intestinal" },
     { "name": "Xilitol", "risk": "Hipoglicemia fatal" },
     { "name": "Cafe", "risk": "Estimulante toxico" },
     { "name": "Alcool", "risk": "Depressor do SNC" },
     { "name": "Abacate (casca/caroco)", "risk": "Persina - toxica" },
-    { "name": "Sal excessivo", "risk": "Desidratacao, sodio" }
+    { "name": "Sal excessivo", "risk": "Desidratacao" }
   ],
   "supplements": {
     "calcium": {
       "importance": "CRITICO",
-      "reason": "Carne tem muito fosforo e pouco calcio",
-      "sources": ["Casca de ovo em po", "Farinha de ossos", "Suplemento mineral (Food Dog)"],
-      "dosage_per_kg_food_g": 1
+      "reason": "Carne tem relacao Ca:P de 1:10 a 1:20. O ideal e 1:1 a 2:1. Sem suplementacao ou ossos crus, a dieta causa deficiencia.",
+      "sources": ["Casca de ovo em po", "Farinha de ossos", "Suplemento mineral (Food Dog, Nutroplus)"],
+      "dosage_eggshell_per_kg_food": "1 colher cha / kg de alimento",
+      "note_diet_types": "BARF e Prey Model com ossos crus NAO precisam de suplemento de calcio. AN cozida e crua sem ossos SIM."
     },
     "omega3": {
       "importance": "Alta",
-      "reason": "Anti-inflamatorio, pele e pelo",
-      "sources": ["Oleo de peixe", "Oleo de salmao"],
+      "reason": "Anti-inflamatorio, pele e pelo, cerebro, coracao",
+      "sources": ["Oleo de peixe", "Oleo de salmao", "Oleo de kril"],
       "dosage_per_10kg_mg": 1000
     },
     "vitamin_e": {
       "importance": "Media",
-      "reason": "Antioxidante",
-      "dosage_per_10kg_ui": 50
+      "reason": "Antioxidante - protege membranas celulares",
+      "dosage_per_10kg_ui": 50,
+      "note": "Essencial quando se suplementa omega-3"
     },
     "vitamin_b_complex": {
       "importance": "Media",
-      "reason": "Dieta cozida pode perder vitaminas do complexo B"
+      "reason": "Dieta cozida perde vitaminas B pelo calor. Essencial para metabolismo.",
+      "note": "Cozimento degrada vitaminas do complexo B"
     },
     "taurine": {
       "importance": "Media",
-      "reason": "Saude cardiaca - especialmente em dieta cozida"
+      "reason": "Saude cardiaca. Calor degrada a taurina dos alimentos.",
+      "sources": ["Coracao bovino", "Coracao de frango", "Peixe"],
+      "note": "Dietas cozidas tem maior risco de deficiencia"
     }
   },
-  "version": "1.0",
+  "version": "1.1",
   "last_updated": "2026-06-30"
 }
