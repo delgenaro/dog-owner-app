@@ -194,6 +194,13 @@ function generateAlerts(dog, groups) {
     })
   }
 
+  if (dog.dietType !== 'cooked') {
+    alerts.push({
+      severity: 'info',
+      message: 'Se for usar ovo na dieta: a clara CRUA contem avidina que sequestra biotina. Cozinhe os ovos (ou pelo menos as claras) para eliminar o risco.'
+    })
+  }
+
   return alerts
 }
 
