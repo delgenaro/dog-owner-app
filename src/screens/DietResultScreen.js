@@ -100,6 +100,21 @@ export default function DietResultScreen({ route, navigation }) {
         ))}
       </View>
 
+      <View style={styles.eggCard}>
+        <Text style={styles.eggTitle}>ðŸ¥š Ovo: barato e nutritivo</Text>
+        <Text style={styles.eggDesc}>
+          1 ovo (55g) = 78 kcal | 6,5g proteÃ­na | 5,5g gordura | casca = 2.000mg cÃ¡lcio
+        </Text>
+        <Text style={styles.eggDesc}>
+          Para o {profile.name}, cada ovo substitui ~50g de carne. Com 4 ovos/dia vocÃª economiza na carne e ainda ganha cÃ¡lcio da casca.
+        </Text>
+        <View style={styles.eggAlert}>
+          <Text style={styles.eggAlertText}>
+            âš ï¸ Clara crua tem avidina (sequestra biotina). Cozinhe os ovos ou pelo menos as claras.
+          </Text>
+        </View>
+      </View>
+
       <View style={styles.paywallCard}>
         <Text style={styles.paywallTitle}>ðŸš€ VersÃ£o Premium</Text>
         <Text style={styles.paywallDesc}>
@@ -160,6 +175,15 @@ const styles = StyleSheet.create({
   criticalBadge: { fontSize: fontSize.xs, color: colors.white, backgroundColor: colors.danger, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4, fontWeight: '700' },
   supplementDosage: { fontSize: fontSize.sm, color: colors.text, marginTop: 2 },
   supplementReason: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 2 },
+
+  eggCard: {
+    backgroundColor: '#FFF8E1', borderRadius: borderRadius.md, padding: spacing.md,
+    marginBottom: spacing.md, borderLeftWidth: 4, borderLeftColor: '#F0AD4E',
+  },
+  eggTitle: { fontSize: fontSize.md, fontWeight: '700', color: colors.text, marginBottom: spacing.xs },
+  eggDesc: { fontSize: fontSize.sm, color: colors.text, lineHeight: 20, marginBottom: spacing.xs },
+  eggAlert: { backgroundColor: '#FCF8E3', borderRadius: borderRadius.sm, padding: spacing.sm, marginTop: spacing.xs },
+  eggAlertText: { fontSize: fontSize.xs, color: '#8A6D3B', lineHeight: 18 },
 
   paywallCard: {
     backgroundColor: colors.primaryDark, borderRadius: borderRadius.lg, padding: spacing.lg,
