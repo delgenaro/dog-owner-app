@@ -1,0 +1,86 @@
+export const SUGGESTED_INGREDIENTS = {
+  meat: [
+    { label: 'Coxa de frango (c/ osso)', value: 'frango_cxa', group: 'meat' },
+    { label: 'Peito de frango', value: 'frango_peito', group: 'meat' },
+    { label: 'Carne moÃ­da bovina', value: 'bovino_moida', group: 'meat' },
+    { label: 'AcÃ©m bovino', value: 'bovino_acem', group: 'meat' },
+    { label: 'CoraÃ§Ã£o bovino', value: 'coracao_bovino', group: 'meat' },
+    { label: 'Sardinha', value: 'sardinha', group: 'meat' },
+  ],
+  muscle_meat: [
+    { label: 'Coxa de frango (c/ osso)', value: 'frango_cxa', group: 'muscle_meat' },
+    { label: 'Peito de frango', value: 'frango_peito', group: 'muscle_meat' },
+    { label: 'Carne moÃ­da bovina', value: 'bovino_moida', group: 'muscle_meat' },
+    { label: 'AcÃ©m bovino', value: 'bovino_acem', group: 'muscle_meat' },
+    { label: 'Sobrecoxa de frango', value: 'frango_sobrecoxa', group: 'muscle_meat' },
+    { label: 'Sardinha', value: 'sardinha', group: 'muscle_meat' },
+  ],
+  liver: [
+    { label: 'FÃ­gado de frango', value: 'figado_frango', group: 'liver' },
+    { label: 'FÃ­gado bovino', value: 'figado_bovino', group: 'liver' },
+  ],
+  organs: [
+    { label: 'FÃ­gado de frango', value: 'figado_frango', group: 'organs' },
+    { label: 'FÃ­gado bovino', value: 'figado_bovino', group: 'organs' },
+    { label: 'Rim bovino', value: 'rim_bovino', group: 'organs' },
+    { label: 'Moela de frango', value: 'moela', group: 'organs' },
+    { label: 'BaÃ§o bovino', value: 'baco', group: 'organs' },
+  ],
+  other_organs: [
+    { label: 'Rim bovino', value: 'rim_bovino', group: 'other_organs' },
+    { label: 'BaÃ§o bovino', value: 'baco', group: 'other_organs' },
+    { label: 'Moela de frango', value: 'moela', group: 'other_organs' },
+    { label: 'PulmÃ£o bovino', value: 'pulmao', group: 'other_organs' },
+  ],
+  secretory: [
+    { label: 'Rim bovino', value: 'rim_bovino', group: 'secretory' },
+    { label: 'BaÃ§o bovino', value: 'baco', group: 'secretory' },
+    { label: 'PÃ¢ncreas bovino', value: 'pancreas', group: 'secretory' },
+  ],
+  raw_bone: [
+    { label: 'PescoÃ§o de frango', value: 'pescoco_frango', group: 'raw_bone' },
+    { label: 'Dorso de frango', value: 'dorso_frango', group: 'raw_bone' },
+    { label: 'Asa de frango', value: 'asa_frango', group: 'raw_bone' },
+    { label: 'Costela bovina crua', value: 'costela_bovina', group: 'raw_bone' },
+    { label: 'PÃ© de frango', value: 'pe_frango', group: 'raw_bone' },
+  ],
+  carbs: [
+    { label: 'Batata-doce', value: 'batata_doce', group: 'carbs' },
+    { label: 'Arroz integral', value: 'arroz_integral', group: 'carbs' },
+    { label: 'Mandioquinha', value: 'mandioquinha', group: 'carbs' },
+    { label: 'Inhame', value: 'inhame', group: 'carbs' },
+    { label: 'Aveia', value: 'aveia', group: 'carbs' },
+    { label: 'Quinoa', value: 'quinoa', group: 'carbs' },
+  ],
+  vegetables: [
+    { label: 'Cenoura', value: 'cenoura', group: 'vegetables' },
+    { label: 'Abobrinha', value: 'abobrinha', group: 'vegetables' },
+    { label: 'AbÃ³bora', value: 'abobora', group: 'vegetables' },
+    { label: 'BrÃ³colis', value: 'brocolis', group: 'vegetables' },
+    { label: 'Couve', value: 'couve', group: 'vegetables' },
+    { label: 'Chuchu', value: 'chuchu', group: 'vegetables' },
+    { label: 'Vagem', value: 'vagem', group: 'vegetables' },
+    { label: 'Beterraba', value: 'beterraba', group: 'vegetables' },
+    { label: 'Espinafre', value: 'espinafre', group: 'vegetables' },
+  ],
+  seeds: [
+    { label: 'Semente de abÃ³bora', value: 'semente_abobora', group: 'seeds' },
+    { label: 'Gergelim', value: 'gergelim', group: 'seeds' },
+    { label: 'LinhaÃ§a', value: 'linhaca', group: 'seeds' },
+  ],
+  fruits: [
+    { label: 'MaÃ§Ã£', value: 'maca', group: 'fruits' },
+    { label: 'Banana', value: 'banana', group: 'fruits' },
+    { label: 'Mirtilo', value: 'mirtilo', group: 'fruits' },
+    { label: 'MamÃ£o', value: 'mamao', group: 'fruits' },
+    { label: 'Melancia', value: 'melancia', group: 'fruits' },
+  ],
+}
+
+export const GROUP_LABELS = {
+  meat: 'Carnes', muscle_meat: 'Carne muscular',
+  organs: 'VÃ­sceras', liver: 'FÃ­gado', other_organs: 'Outras vÃ­sceras',
+  secretory: 'VÃ­sceras secretoras',
+  raw_bone: 'Osso cru comestÃ­vel', carbs: 'Carboidratos',
+  vegetables: 'Vegetais', fruits: 'Frutas', seeds: 'Sementes',
+}
