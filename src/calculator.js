@@ -110,17 +110,40 @@ const DIET_RATIOS = {
 }
 
 // --- 9. Alocacao de ingredientes por grupo ---
+const EGG_WEIGHT_G = 55
+const EGG_EDIBLE_G = 50
+const EGG_CALCIUM_MG = 2000
+
 function allocateIngredients(dog) {
   const totalG = dailyFoodGrams(dog)
   const ratios = DIET_RATIOS[dog.dietType] || DIET_RATIOS.cooked
   const groups = {}
+  const eggsPerDay = dog.eggsPerDay || 0
 
   for (const r of ratios) {
-    const grams = totalG * (r.pct / 100)
+    let grams = totalG * (r.pct / 100)
     groups[r.group] = {
       pct: r.pct,
       grams: Math.round(grams * 10) / 10,
       note: r.note
+    }
+  }
+
+  if (eggsPerDay > 0) {
+    const eggTotalG = eggsPerDay * EGG_WEIGHT_G
+    const eggEdibleG = eggsPerDay * EGG_EDIBLE_G
+    const meatGroup = groups.muscle_meat || groups.meat
+    if (meatGroup && meatGroup.grams >= eggEdibleG) {
+      meatGroup.grams = Math.round((meatGroup.grams - eggEdibleG) * 10) / 10
+      meatGroup.eggsReplacedG = eggEdibleG
+      meatGroup.eggsCount = eggsPerDay
+    }
+    groups.eggs = {
+      pct: Math.round(eggTotalG / totalG * 100),
+      grams: Math.round(eggTotalG * 10) / 10,
+      note: 'Ovo inteiro (casca incluida) â€” fonte barata de proteina e calcio',
+      count: eggsPerDay,
+      calciumMg: eggsPerDay * EGG_CALCIUM_MG
     }
   }
 
@@ -165,6 +188,16 @@ function determineSupplements(dog, groups) {
     })
   }
 
+  if (groups.eggs && groups.eggs.count > 0) {
+    const caMg = groups.eggs.calciumMg
+    supplements.push({
+      name: 'Calcio da casca do ovo',
+      dosage: groups.eggs.count + ' ovos/dia fornecem ~' + caMg + 'mg de calcio',
+      critical: false,
+      reason: 'Casca do ovo tem 95% de carbonato de calcio. Se a dieta ja tem osso cru, esse calcio e extra â€” nao substitui a necessidade de ajustar o osso.'
+    })
+  }
+
   return supplements
 }
 
@@ -194,10 +227,10 @@ function generateAlerts(dog, groups) {
     })
   }
 
-  if (dog.dietType !== 'cooked') {
+  if ((dog.eggsPerDay || 0) > 0 && dog.dietType !== 'cooked') {
     alerts.push({
-      severity: 'info',
-      message: 'Se for usar ovo na dieta: a clara CRUA contem avidina que sequestra biotina. Cozinhe os ovos (ou pelo menos as claras) para eliminar o risco.'
+      severity: 'warning',
+      message: dog.eggsPerDay + ' ovos CRUS por dia: a clara contem avidina que sequestra biotina. Com essa quantidade, o risco de deficiencia de biotina e REAL. Cozinhe os ovos ou pelo menos as claras.'
     })
   }
 
