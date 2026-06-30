@@ -4,6 +4,8 @@ import { StatusBar } from 'expo-status-bar'
 import DogRegistrationScreen from './src/screens/DogRegistrationScreen'
 import DietResultScreen from './src/screens/DietResultScreen'
 import PremiumMealPlanScreen from './src/screens/PremiumMealPlanScreen'
+import BreedCatalogScreen from './src/screens/BreedCatalogScreen'
+import BreedDetailScreen from './src/screens/BreedDetailScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -32,6 +34,16 @@ export default function App() {
           name="PremiumMealPlan"
           component={PremiumMealPlanScreen}
           options={{ title: 'Lista de Compras Premium' }}
+        />
+        <Stack.Screen
+          name="BreedCatalog"
+          component={BreedCatalogScreen}
+          options={{ title: 'CatÃ¡logo de RaÃ§as' }}
+        />
+        <Stack.Screen
+          name="BreedDetail"
+          component={BreedDetailScreen}
+          options={{ title: 'Detalhes da RaÃ§a' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
