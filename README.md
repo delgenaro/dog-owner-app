@@ -1,30 +1,33 @@
 # Dog Owner App
 
-Aplicativo para donos de caes - racas, cuidados, comunidade e muito mais.
+Aplicativo para donos de caes - racas, nutricao, cuidados e comunidade.
 
-## Visao do Projeto
+## Funcionalidades Planejadas
 
-Um app completo que ajuda donos de caes a:
-- Descobrir e comparar racas por porte, temperamento, cuidados
-- Encontrar informacoes sobre saude, alimentacao e adestramento
-- Conectar-se com outros donos na comunidade
-- Gerenciar a saude e vacinas do seu pet
+- **Catalogo de Racas** - 31 racas com dados completos (peso, altura, expectativa de vida, temperamento,energia, saude)
+- **Calculadora de Dieta** - Calculo RER/MER baseado em peso, idade, atividade, castracao e ECC
+- **Comparador de Racas** - Compare racas lado a lado
+- **Guia de Cuidados** - Saude, alimentacao e adestramento por raca
+- **Comunidade** - Conecte-se com outros donos
 
 ## Estrutura do Projeto
 
 `
 dog-owner-app/
-  data/           - Dados estruturados (racas, categorias)
-  docs/           - Documentacao do projeto
-  src/            - Codigo fonte (em breve)
+  data/
+    breeds-small.json     - 9 racas de pequeno porte
+    breeds-medium.json    - 10 racas de medio porte
+    breeds-large.json     - 10 racas de grande porte
+    breeds-giant.json     - 7 racas gigantes
+    breeds-all.json       - Consolidado com 31 racas
+    nutrition-multipliers.json - Fatores nutricionais e formulas
+  docs/
+    tech-stack.md         - Recomendacao de tecnologias
+    project-plan.md       - Roadmap do projeto
+    nutrition-guide.md    - Guia completo de nutricao canina
+  src/                    - Codigo fonte (em breve)
 `
 
-## Dados
+## Repositorio
 
-Os dados de racas estao organizados em data/ no formato JSON, categorizados por porte:
-
-- reeds-small.json  - Racas de pequeno porte (ate 10kg)
-- reeds-medium.json - Racas de medio porte (10-25kg)
-- reeds-large.json  - Racas de grande porte (25-44kg)
-- reeds-giant.json  - Racas gigantes (45kg+)
-- reeds-all.json    - Consolidado completo
+https://github.com/delgenaro/dog-owner-app
