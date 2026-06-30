@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import {
   SEX_OPTIONS, NEUTERED_OPTIONS, ACTIVITY_OPTIONS, GOAL_OPTIONS,
@@ -9,6 +9,7 @@ import FormField from '../components/FormField'
 import PickerField from '../components/PickerField'
 import BCSSelector from '../components/BCSSelector'
 import MultiSelect from '../components/MultiSelect'
+import { addDog } from '../store/dogs'
 
 const INITIAL_STATE = {
   name: '',
@@ -45,14 +46,17 @@ export default function DogRegistrationScreen({ navigation }) {
     return Object.keys(errs).length === 0
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validate()) return
     const profile = {
       ...form,
       weightKg: Number(form.weightKg),
       ageYears: Number(form.ageYears),
     }
-    navigation.navigate('DietResult', { profile })
+    const dog = await addDog(profile)
+    Alert.alert('CÃ£o cadastrado', `${dog.name} foi adicionado com sucesso!`, [
+      { text: 'Ver Perfil', onPress: () => navigation.replace('DogProfile', { dogId: dog.id }) },
+    ])
   }
 
   return (
