@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
 import { colors, spacing, fontSize, borderRadius } from '../constants/theme'
 import {
   SEX_OPTIONS, NEUTERED_OPTIONS, ACTIVITY_OPTIONS, GOAL_OPTIONS,
@@ -14,6 +15,7 @@ import { addDog } from '../store/dogs'
 const INITIAL_STATE = {
   name: '',
   breed: '',
+  photoUri: '',
   weightKg: '',
   ageYears: '',
   porte: 'large',
@@ -33,6 +35,47 @@ export default function DogRegistrationScreen({ navigation }) {
   const [errors, setErrors] = useState({})
 
   const update = (key, value) => setForm(prev => ({ ...prev, [key]: value }))
+
+  const pickPhoto = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    if (status !== 'granted') {
+      Alert.alert('PermissÃ£o necessÃ¡ria', 'Precisamos acessar sua galeria para selecionar a foto.')
+      return
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    })
+    if (!result.canceled) {
+      update('photoUri', result.assets[0].uri)
+    }
+  }
+
+  const takePhoto = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync()
+    if (status !== 'granted') {
+      Alert.alert('PermissÃ£o necessÃ¡ria', 'Precisamos acessar sua cÃ¢mera para tirar a foto.')
+      return
+    }
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    })
+    if (!result.canceled) {
+      update('photoUri', result.assets[0].uri)
+    }
+  }
+
+  const handlePhotoPress = () => {
+    Alert.alert('Foto do cÃ£o', 'Escolha uma opÃ§Ã£o:', [
+      { text: 'Tirar foto', onPress: takePhoto },
+      { text: 'Galeria', onPress: pickPhoto },
+      { text: 'Cancelar', style: 'cancel' },
+    ])
+  }
 
   const validate = () => {
     const errs = {}
@@ -63,6 +106,16 @@ export default function DogRegistrationScreen({ navigation }) {
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>IdentificaÃ§Ã£o</Text>
+        <TouchableOpacity style={styles.photoPicker} onPress={handlePhotoPress}>
+          {form.photoUri ? (
+            <Image source={{ uri: form.photoUri }} style={styles.photoPreview} />
+          ) : (
+            <View style={styles.photoPlaceholder}>
+              <Text style={styles.photoIcon}>ðŸ“·</Text>
+              <Text style={styles.photoLabel}>Adicionar foto</Text>
+            </View>
+          )}
+        </TouchableOpacity>
         <FormField label="Nome do cÃ£o" value={form.name} onChangeText={v => update('name', v)} placeholder="Ex: Thor" error={errors.name} />
         <View style={styles.row}>
           <View style={styles.rowHalf}>
@@ -139,6 +192,16 @@ const styles = StyleSheet.create({
     shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 4, elevation: 2,
   },
   sectionTitle: { fontSize: fontSize.lg, fontWeight: '700', color: colors.text, marginBottom: spacing.md },
+
+  photoPicker: { alignItems: 'center', marginBottom: spacing.md },
+  photoPreview: { width: 100, height: 100, borderRadius: 50, borderWidth: 3, borderColor: colors.primary },
+  photoPlaceholder: {
+    width: 100, height: 100, borderRadius: 50, backgroundColor: '#EBF3FC',
+    justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: colors.border, borderStyle: 'dashed',
+  },
+  photoIcon: { fontSize: 28 },
+  photoLabel: { fontSize: fontSize.xs, color: colors.primary, fontWeight: '600', marginTop: 4 },
+
   row: { flexDirection: 'row', gap: spacing.sm },
   rowHalf: { flex: 1 },
   submit: {
