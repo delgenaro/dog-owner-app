@@ -151,12 +151,38 @@ function allocateIngredients(dog) {
   return groups
 }
 
-// --- 10. Suplementacao ---
+// --- 10. Database de alternativas naturais ---
+const SUPPLEMENT_TO_NATURAL = {
+  'Calcio': 'C\u00e1lcio',
+  'Oleo de peixe (EPA/DHA)': '\u00d4mega-3 (EPA/DHA)',
+  'Vitamina E': 'Vitamina E',
+  'Taurina': 'Taurina',
+  'Calcio da casca do ovo': 'C\u00e1lcio',
+}
+
+const NATURAL_FOODS_CACHE = {}
+try {
+  const { NATURAL_SUPPLEMENTS } = require('./data/natural-supplements')
+  for (const s of NATURAL_SUPPLEMENTS) {
+    NATURAL_FOODS_CACHE[s.nutrient] = s
+  }
+} catch (e) { /* fallback */ }
+
+function getNaturalAlternatives(supplementName) {
+  const key = SUPPLEMENT_TO_NATURAL[supplementName]
+  if (!key) return []
+  const entry = NATURAL_FOODS_CACHE[key]
+  if (!entry) return []
+  return entry.foods.slice(0, 3).map(f => ({ name: f.name, dosage: f.dosage }))
+}
+
+// --- 11. Suplementacao ---
 function determineSupplements(dog, groups) {
   const supplements = []
   const hasBone = (groups.raw_bone && groups.raw_bone.grams > 0)
 
   if (dog.dietType === 'cooked' || dog.dietType === 'raw_no_bones') {
+    const alt = getNaturalAlternatives('Calcio')
     supplements.push({
       name: 'Calcio',
       dosage: hasBone ? '1 colher cha casca ovo / kg alimento' : '1 colher cha casca ovo / kg alimento',
@@ -165,26 +191,32 @@ function determineSupplements(dog, groups) {
     })
   }
 
+  const omegaAlt = getNaturalAlternatives('Oleo de peixe (EPA/DHA)')
   supplements.push({
     name: 'Oleo de peixe (EPA/DHA)',
     dosage: Math.round(dog.weightKg * 30) + 'mg EPA+DHA/dia (~' + Math.round(dog.weightKg * 0.1) + 'ml)',
     critical: false,
-    reason: 'Anti-inflamatorio, pele, pelo, cerebro'
+    reason: 'Anti-inflamatorio, pele, pelo, cerebro',
+    naturalAlternatives: omegaAlt
   })
 
+  const vitEAlt = getNaturalAlternatives('Vitamina E')
   supplements.push({
     name: 'Vitamina E',
     dosage: Math.round(dog.weightKg * 1.5) + ' UI/dia',
     critical: false,
-    reason: 'Antioxidante ï¿½ essencial com omega-3'
+    reason: 'Antioxidante essencial com omega-3',
+    naturalAlternatives: vitEAlt
   })
 
   if (dog.dietType === 'cooked') {
+    const tauAlt = getNaturalAlternatives('Taurina')
     supplements.push({
       name: 'Taurina',
       dosage: 'Incluir coracao na dieta ou suplementar 250-500mg/dia',
       critical: false,
-      reason: 'Calor degrada taurina dos alimentos'
+      reason: 'Calor degrada taurina dos alimentos',
+      naturalAlternatives: tauAlt
     })
   }
 
