@@ -1,0 +1,125 @@
+{
+  "title": "MER_Factors",
+  "description": "Tabela de fatores multiplicadores para calculo do MER e regras de negocio",
+  "version": "2.0",
+  "formula": {
+    "rer": "70 * (weight_kg ** 0.75)",
+    "mer": "rer * life_stage_factor * activity_factor * bcs_correction * health_modifier"
+  },
+  "life_stage": {
+    "filhote_0_4m":   { "factor": 3.0, "note": "Ate 4 meses" },
+    "filhote_4_12m":  { "factor": 2.0, "note": "4-12 meses" },
+    "adulto_castrado":  { "factor": 1.6, "range": [1.4, 1.6], "note": "Adulto castrado" },
+    "adulto_inteiro":   { "factor": 1.8, "range": [1.6, 1.8], "note": "Adulto nao castrado" },
+    "senior_ativo":     { "factor": 1.3, "range": [1.2, 1.4], "note": "Senior com atividade regular" },
+    "senior_sedentario":{ "factor": 1.1, "range": [1.0, 1.2], "note": "Senior sedentario" }
+  },
+  "activity": {
+    "sedentario":   { "multiplier": 0.9, "note": "So caminhadas curtas, passa o dia deitado" },
+    "leve":         { "multiplier": 1.0, "note": "2-3 passeios curtos/dia" },
+    "moderado":     { "multiplier": 1.1, "note": "2 passeios de 30min + brincadeiras" },
+    "ativo":        { "multiplier": 1.2, "note": "Corrida, agility, mais de 1h de exercicio" },
+    "muito ativo":  { "multiplier": 1.3, "note": "Trabalho, caca, esporte de alto rendimento" }
+  },
+  "bcs_correction": {
+    "description": "Ajuste metabolico baseado no BCS (1-9). Cada ponto acima de 5 reduz 9.8 kcal/kg^0.75",
+    "formula": "ajuste = (bcs - 5) * -9.8 * (peso ** 0.75)  # positivo se abaixo, negativo se acima"
+  },
+  "goal_multiplier": {
+    "manutencao":   { "adjust": 1.0, "note": "Usa MER direto" },
+    "perda_peso":   { "adjust": 0.8, "note": "80% do MER" },
+    "ganho_peso":   { "adjust": 1.2, "note": "120% do MER" }
+  },
+  "diet_ratios": {
+    "cooked": {
+      "groups": {
+        "meat":         { "pct": 30, "variety": true, "note": "Carnes desossadas variadas" },
+        "organs":       { "pct": 5,  "variety": true, "liver_max_pct": 50, "note": "Fígado max 50% das vísceras" },
+        "carbs":        { "pct": 35, "note": "Batata-doce, mandioquinha, arroz, aveia" },
+        "vegetables":   { "pct": 30, "variety": true, "note": "Cenoura, abobrinha, brocolis, couve" },
+        "fruits":       { "pct": 0,  "optional": true, "note": "Ate 10% extra como petisco" }
+      },
+      "supplements": ["calcio_se_sem_osso", "omega3", "vitamina_e", "complexo_b", "taurina"]
+    },
+    "barf": {
+      "groups": {
+        "muscle_meat":    { "pct": 70, "note": "Carnes musculosas" },
+        "raw_bone":       { "pct": 10, "note": "Ossos carnudos crus (fonte natural de calcio)" },
+        "liver":          { "pct": 5,  "note": "Figado" },
+        "other_organs":   { "pct": 5,  "note": "Outras visceras (rim, baco, pancreas)" },
+        "vegetables":     { "pct": 7,  "note": "Vegetais variados" },
+        "seeds":          { "pct": 2,  "note": "Sementes (abobora, gergelim)" },
+        "fruits":         { "pct": 1,  "note": "Frutas" }
+      },
+      "supplements": ["omega3", "vitamina_e"]
+    },
+    "prey_model": {
+      "groups": {
+        "muscle_meat":    { "pct": 80, "note": "100% animal" },
+        "raw_bone":       { "pct": 10, "note": "Ossos carnudos crus" },
+        "liver":          { "pct": 5,  "note": "Figado" },
+        "secretory":      { "pct": 5,  "note": "Outras visceras secretoras" }
+      },
+      "supplements": ["omega3", "vitamina_e"]
+    },
+    "raw_no_bones": {
+      "extends": "barf",
+      "overrides": {
+        "raw_bone": { "pct": 0, "note": "Sem ossos — calcio suplementado" },
+        "muscle_meat": { "pct": 80, "note": "80% carne" }
+      },
+      "supplements": ["calcio_obrigatorio", "omega3", "vitamina_e"]
+    }
+  },
+  "daily_amount_pct": {
+    "description": "% do peso corporal em alimento por dia",
+    "formula": "daily_g = weight_kg * (pct / 100)",
+    "by_type": {
+      "cooked":       { "pct": 2.5, "range": [2.0, 3.0] },
+      "barf":         { "pct": 2.5, "range": [2.0, 4.0] },
+      "prey_model":   { "pct": 2.5, "range": [2.0, 4.0] },
+      "raw_no_bones": { "pct": 2.5, "range": [2.0, 4.0] }
+    },
+    "goal_adjustment": {
+      "perda_peso": 0.85,
+      "ganho_peso": 1.15,
+      "manutencao": 1.0
+    }
+  },
+  "supplement_rules": {
+    "calcio": {
+      "required_when": ["cooked", "raw_no_bones"],
+      "provided_by_bones": ["barf", "prey_model"],
+      "source_eggshell": "1/2 colher cha por kg de alimento",
+      "source_commercial": "20-25g Food Dog por kg de alimento"
+    },
+    "omega3": {
+      "always_recommended": true,
+      "dosage_mg_per_kg": 30,
+      "source": "oleo de peixe 1000mg EPA+DHA / 10kg"
+    },
+    "vitamina_e": {
+      "always_recommended": true,
+      "dosage_ui_per_kg": 1.5,
+      "note": "Essencial com suplementacao de omega-3"
+    },
+    "taurina": {
+      "required_when": ["cooked"],
+      "note": "Calor degrada taurina. Coracao e fonte natural (incluir na dieta)"
+    },
+    "complexo_b": {
+      "required_when": ["cooked"],
+      "note": "Cozimento degrada vitaminas B"
+    }
+  },
+  "alerts_rules": {
+    "liver_exceeds_5pct": { "severity": "warning", "message": "Figado acima de 5% da dieta — risco de hipervitaminose A" },
+    "raw_egg_white":       { "severity": "warning", "message": "Clara de ovo crua em excesso — avidina sequestra biotina. Cozinhe as claras ou os ovos inteiros." },
+    "cooked_bones":        { "severity": "critical", "message": "OSSOS COZIDOS SAO PROIBIDOS — lascam e perfuram o intestino." },
+    "no_organ_variety":    { "severity": "info",     "message": "Apenas figado nas visceras — ideal alternar com rim, baco, pancreas." },
+    "no_vegetables":       { "severity": "info",     "message": "Zero vegetais na dieta — sem fibras e antioxidantes." },
+    "no_fish_omega3":      { "severity": "info",     "message": "Sem fonte de omega-3 (EPA/DHA) — ideal suplementar oleo de peixe." },
+    "calcium_deficit":     { "severity": "critical", "message": "Deficiencia de calcio — suplementar IMEDIATAMENTE." },
+    "ca_excess":           { "severity": "warning",  "message": "Excesso de calcio na dieta — risco de problemas renais e de desenvolvimento." }
+  }
+}
