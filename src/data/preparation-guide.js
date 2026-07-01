@@ -183,7 +183,8 @@ export const PREPARATION_GUIDE = [
     cookedBenefit: 'PERIGOSO cozido (ossos estilhaÃ§am).',
     risk: 'Nunca cozido. Ossos de pÃ© de frango cozido sÃ£o finos e perfurantes.',
     smallDogRisk: 'PÃ© de frango inteiro pode ser grande para cÃ£es <5kg. Cortar ao meio ou servir apenas os dedos.',
-    summary: 'CRU. Melhor fonte natural de glucosamina e condroitina. Cortar ao meio para cÃ£es pequenos.',
+    tip: 'Dica prÃ¡tica: decepe 2-3 dedos para o cÃ£o pequeno e o restante do pÃ© (base + metatarso) fica para o cÃ£o grande. Assim os dois aproveitam.',
+    summary: 'CRU. Melhor fonte natural de glucosamina e condroitina. Para cÃ£es pequenos: apenas os dedos.',
   },
   {
     name: 'PescoÃ§o/Dorso/Asa de frango',
