@@ -19,6 +19,7 @@ export default function DietResultScreen({ route, navigation }) {
   const { profile } = route.params
   const plan = calculateDiet(profile)
   const [expandedAlt, setExpandedAlt] = useState(null)
+  const isSmallDog = profile.weightKg < 10
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -124,6 +125,9 @@ export default function DietResultScreen({ route, navigation }) {
                 {alt.prep && alt.prep.best !== 'both' && (
                   <Text style={styles.altPrep}>{alt.prep.summary}</Text>
                 )}
+                {isSmallDog && alt.prep?.smallDogRisk && (
+                  <Text style={styles.smallDogAlert}>{alt.prep.smallDogRisk}</Text>
+                )}
               </View>
             ))}
           </View>
@@ -217,6 +221,7 @@ const styles = StyleSheet.create({
   prepBadgeCooked: { backgroundColor: '#FCF8E3' },
   prepBadgeBoth: { backgroundColor: '#D9EDF7' },
   prepBadgeText: { fontSize: 11, fontWeight: '700' },
+  smallDogAlert: { backgroundColor: '#FCF8E3', borderRadius: 4, padding: spacing.xs, marginTop: 4, fontSize: fontSize.xs, color: '#8A6D3B', lineHeight: 16 },
 
   eggCard: {
     backgroundColor: '#FFF8E1', borderRadius: borderRadius.md, padding: spacing.md,
