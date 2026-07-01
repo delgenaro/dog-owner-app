@@ -171,7 +171,8 @@ export const PREPARATION_GUIDE = [
     rawBenefit: 'OSSO CRU Ã‰ SEGURO e maleÃ¡vel. Fonte de cÃ¡lcio, fÃ³sforo e colÃ¡geno.',
     cookedBenefit: 'NUNCA. Osso cozido estilhaÃ§a e pode perfurar o trato intestinal.',
     risk: 'OSSO COZIDO = RISCO DE MORTE. Qualquer osso cozido, assado ou grelhado Ã© PERIGOSO.',
-    summary: 'SEMPRE CRU. NUNCA cozido, assado, grelhado ou defumado.',
+    smallDogRisk: 'CÃ£es <10kg podem tentar engolir ossos inteiros â†’ risco de engasgo ou obstruÃ§Ã£o. Preferir asas/dorsos (ossos menores e mais maleÃ¡veis) e SEMPRE supervisionar.',
+    summary: 'SEMPRE CRU. NUNCA cozido. Para cÃ£es pequenos: escolher ossos menores (asa, dorso) e supervisionar.',
   },
   {
     name: 'PÃ© de frango',
@@ -181,7 +182,8 @@ export const PREPARATION_GUIDE = [
     rawBenefit: 'Rico em glucosamina, condroitina e colÃ¡geno. Cru Ã© maleÃ¡vel e seguro.',
     cookedBenefit: 'PERIGOSO cozido (ossos estilhaÃ§am).',
     risk: 'Nunca cozido. Ossos de pÃ© de frango cozido sÃ£o finos e perfurantes.',
-    summary: 'CRU. Melhor fonte natural de glucosamina e condroitina.',
+    smallDogRisk: 'PÃ© de frango inteiro pode ser grande para cÃ£es <5kg. Cortar ao meio ou servir apenas os dedos.',
+    summary: 'CRU. Melhor fonte natural de glucosamina e condroitina. Cortar ao meio para cÃ£es pequenos.',
   },
   {
     name: 'PescoÃ§o/Dorso/Asa de frango',
@@ -191,7 +193,8 @@ export const PREPARATION_GUIDE = [
     rawBenefit: 'Ossos crus seguros e nutritivos. ProporÃ§Ã£o carne:osso equilibrada.',
     cookedBenefit: 'PERIGOSO.',
     risk: 'Nunca cozido. Ossos de aves cozidos sÃ£o os mais perigosos.',
-    summary: 'SEMPRE CRU.',
+    smallDogRisk: 'PescoÃ§o de frango Ã© o osso mais indicado para cÃ£es pequenos (vÃ©rtebras pequenas e macias). Asa tambÃ©m funciona. SEMPRE supervisionar.',
+    summary: 'SEMPRE CRU. PescoÃ§o Ã© o melhor osso para cÃ£es de pequeno porte.',
   },
   {
     name: 'Traqueia bovina',
@@ -612,19 +615,16 @@ export const PREPARATION_GUIDE = [
 ]
 
 export function getPreparation(foodKey) {
-  return PREPARATION_GUIDE.find(item => item.key === foodKey) || null
-}
-
-export function getFoodsByPreparation(method) {
-  return PREPARATION_GUIDE.filter(item => item.best === method)
-}
-
-export function getPreparationSummary(foodKey) {
-  const item = getPreparation(foodKey)
+  const item = PREPARATION_GUIDE.find(i => i.key === foodKey)
   if (!item) return null
   return {
     best: item.best,
     summary: item.summary,
-    label: item.best === 'raw' ? 'ðŸ¥© Melhor cru' : item.best === 'cooked' ? 'ðŸ³ Precisa cozido' : 'âœ… Cru ou cozido'
+    smallDogRisk: item.smallDogRisk || null,
+    label: item.best === 'raw' ? 'ðŸ¥© Cru' : item.best === 'cooked' ? 'ðŸ³ Cozido' : 'âœ… Cru ou coz.'
   }
+}
+
+export function getFoodsByPreparation(method) {
+  return PREPARATION_GUIDE.filter(item => item.best === method)
 }
