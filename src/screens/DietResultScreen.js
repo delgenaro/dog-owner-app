@@ -155,7 +155,7 @@ export default function DietResultScreen({ route, navigation }) {
           No plano pago, vocÃª define a refeiÃ§Ã£o ideal e o app calcula automaticamente as quantidades exatas de cada ingrediente para 15 ou 30 dias, gerando lista de compras completa.
         </Text>
         <TouchableOpacity style={styles.paywallButton} onPress={() => navigation.navigate('PremiumMealPlan', { profile })}>
-          <Text style={styles.paywallButtonText">Ver Planos</Text>
+          <Text style={styles.paywallButtonText}>Ver Planos</Text>
         </TouchableOpacity>
       </View>
 
