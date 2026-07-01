@@ -168,8 +168,9 @@ function getNaturalAlternatives(supplementName) {
       dosage: f.dosage,
       prep: prep ? {
         best: prep.best,
-        label: prep.best === 'raw' ? 'ðŸ¥© Cru' : prep.best === 'cooked' ? 'ðŸ³ Cozido' : 'âœ… Cru ou cozido',
-        summary: prep.summary
+        label: prep.label,
+        summary: prep.summary,
+        smallDogRisk: prep.smallDogRisk
       } : null
     }
   })
