@@ -106,6 +106,7 @@ function SupplementCard({ sup }) {
           <Text style={styles.foodDosage}>{f.dosage}</Text>
           {expanded === i && f.note && <Text style={styles.foodNote}>{f.note}</Text>}
           {expanded === i && badge && badge.summary && <Text style={styles.prepSummary}>{badge.summary}</Text>}
+          {expanded === i && badge && badge.smallDogRisk && <Text style={styles.smallDogAlert}>ðŸ• {badge.smallDogRisk}</Text>}
         </TouchableOpacity>
       )})}
 
@@ -176,6 +177,7 @@ const styles = StyleSheet.create({
   fppBoth: { backgroundColor: '#D9EDF7' },
   fppText: { fontSize: 10, fontWeight: '700' },
   prepSummary: { fontSize: fontSize.xs, color: colors.textSecondary, marginTop: 4, lineHeight: 16, fontStyle: 'italic', backgroundColor: '#F5F5F5', padding: spacing.xs, borderRadius: 4 },
+  smallDogAlert: { backgroundColor: '#FCF8E3', borderRadius: 4, padding: spacing.xs, marginTop: 4, fontSize: fontSize.xs, color: '#8A6D3B', lineHeight: 16 },
 
   tipBox: { backgroundColor: '#DFF0D8', borderRadius: borderRadius.sm, padding: spacing.sm, marginTop: spacing.md },
   tipLabel: { fontSize: fontSize.sm, fontWeight: '700', color: '#3C763D', marginBottom: 2 },
